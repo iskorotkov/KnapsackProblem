@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace KnapsackProblem.BlazorApp.Data
 {
-    public class ImplementationRegistry
+    public class ImplementationRegistryService
     {
         public List<IFileReference> Implementations { get; } = new List<IFileReference>();
 

@@ -1,15 +1,24 @@
-@using KnapsackProblem.BlazorApp.Data
-@inject ImplementationRegistry registry
+﻿<div>
+    <select title="Select implementation" @bind="Selected">
+        @foreach (var impl in AvailableImplementations)
+        {
+            <option>@impl</option>
+        }
+    </select>
+</div>
 
-<FilePicker AllowMultiple="true" ButtonText="Add implementations" OnFilesSelected="@AddImplementations" FilePickerId="pickinput"/>
+@if (Selected != null)
+{
+    <div>Selected option is '@Selected'.</div>
+}
 
 @code
 {
-    private async Task AddImplementations(IEnumerable<IFileReference> files)
-    {
-        foreach (var file in files)
-        {
-            await registry.Add(file);
-        }
-    }
+    private List<string> AvailableImplementations = new List<string>
+{
+        "option 1",
+        "option 2"
+    };
+
+    private string Selected { get; set; }
 }

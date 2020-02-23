@@ -1,0 +1,15 @@
+@using KnapsackProblem.BlazorApp.Data
+@inject ImplementationRegistryService registry
+
+<FilePicker AllowMultiple="true" ButtonText="Add implementations" OnFilesSelected="@AddImplementations" FilePickerId="pickinput"/>
+
+@code
+{
+    private async Task AddImplementations(IEnumerable<IFileReference> files)
+    {
+        foreach (var file in files)
+        {
+            await registry.Add(file);
+        }
+    }
+}

@@ -1,8 +1,8 @@
 ﻿@page "/"
 @using Data.Knapsack
 @using Data
-@using KnapsackProblem.BlazorApp.Pages.FilePicking
-@using KnapsackProblem.BlazorApp.Pages.KnapsackItems
+@using KnapsackProblem.BlazorApp.Pages.FilePickers
+@using KnapsackProblem.BlazorApp.Pages.Knapsack
 @inject InputService InputService
 
 <h1>Knapsack problem</h1>
@@ -26,6 +26,9 @@
     <button type="submit" @onclick="UpdateItems">Show items</button>
 </div>
 
+<div>
+    <KnapsackStatus />
+</div>
 
 <div>
     <AvailableItems Items="@Items" />

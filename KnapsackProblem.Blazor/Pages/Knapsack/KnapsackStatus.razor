@@ -1,0 +1,23 @@
+﻿@using KnapsackProblem.BlazorApp.Data
+@inject InputService inputService
+
+<h3>Knapsack status</h3>
+
+<div>
+    Capacity: <input type="number" value="@(knapsack != null ? knapsack.MaxWeight : 50)" />
+</div>
+
+@code {
+    private Data.Knapsack.Knapsack knapsack { get; set; }
+
+    private async Task UpdateKnapsack()
+    {
+        knapsack = inputService.Input.Knapsack;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+        inputService.InputUpdated += UpdateKnapsack;
+    }
+}

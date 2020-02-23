@@ -11,6 +11,8 @@ namespace KnapsackProblem.BlazorApp.Data
     {
         public KnapsackInput Input { get; private set; } = new KnapsackInput();
 
+        public event Func<Task> InputUpdated;
+
         public async Task SetFromFile(IFileReference file)
         {
             await using var stream = await file.CreateMemoryStreamAsync(4096);
@@ -22,6 +24,8 @@ namespace KnapsackProblem.BlazorApp.Data
             }
 
             Input = JsonConvert.DeserializeObject<KnapsackInput>(content);
+
+            InputUpdated?.Invoke();
         }
     }
 }

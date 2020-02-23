@@ -42,10 +42,6 @@
     private async Task UpdateItems()
     {
         Items = InputService.Input?.Items;
-        //if (child != null)
-        //{
-        //    await child.Refresh();
-        //}
         await InvokeAsync(StateHasChanged);
     }
 }

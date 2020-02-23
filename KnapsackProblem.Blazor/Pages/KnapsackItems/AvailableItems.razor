@@ -27,9 +27,4 @@ Available items:
 @code {
     [Parameter]
     public List<KnapsackItem> Items { get; set; }
-
-    public async Task Refresh()
-    {
-        await InvokeAsync(StateHasChanged);
-    }
 }

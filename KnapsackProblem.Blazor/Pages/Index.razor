@@ -1,5 +1,17 @@
 ﻿@page "/"
+@using System.IO
+@using global::Blazor.FileReader
+@using Microsoft.AspNetCore.Components
+@inject IFileReaderService fileReaderService;
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<div>
+    Add implementation
+    <ImplementationSelector />
+</div>
+
+<div>
+    Select input file
+    <InputFileSelector />
+</div>

@@ -1,3 +1,5 @@
+using Blazor.FileReader;
+using KnapsackProblem.Blazor.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,8 @@ namespace KnapsackProblem.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddFileReaderService();
+            services.AddSingleton<ImplementationRegistry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

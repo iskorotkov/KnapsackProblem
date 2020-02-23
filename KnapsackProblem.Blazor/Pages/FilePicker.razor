@@ -1,0 +1,32 @@
+﻿@using global::Blazor.FileReader
+@using Microsoft.AspNetCore.Components
+@inject IFileReaderService fileReaderService
+
+@if (AllowMultiple)
+{
+    <input id="filepicker" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="display: none" />
+}
+else
+{
+    <input id="filepicker" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="display: none" />
+}
+<input value="@ButtonText" type="button" onclick="document.getElementById('filepicker').click()" />
+
+@code {
+    [Parameter]
+    public Action<IEnumerable<IFileReference>> OnFilesSelected { get; set; }
+
+    [Parameter]
+    public string ButtonText { get; set; }
+
+    [Parameter]
+    public bool AllowMultiple { get; set; }
+
+    private ElementReference inputTypeFileElement;
+
+    private async Task ReadFile()
+    {
+        var files = await fileReaderService.CreateReference(inputTypeFileElement).EnumerateFilesAsync();
+        OnFilesSelected(files);
+    }
+}

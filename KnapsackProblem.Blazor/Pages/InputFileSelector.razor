@@ -1,0 +1,22 @@
+﻿@using System.IO
+@using global::Blazor.FileReader
+@using Microsoft.AspNetCore.Components
+@inject IFileReaderService fileReaderService;
+
+<input type="file" @ref=inputTypeFileElement @onchange="ReadFile" />
+
+@code
+{
+    private ElementReference inputTypeFileElement;
+    private string content;
+
+    private async Task ReadFile()
+    {
+        foreach (var file in await fileReaderService.CreateReference(inputTypeFileElement).EnumerateFilesAsync())
+        {
+            await using var stream = await file.CreateMemoryStreamAsync(4096);
+            var reader = new StreamReader(stream);
+            content = reader.ReadToEnd();
+        }
+    }
+}

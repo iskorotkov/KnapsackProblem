@@ -1,21 +1,15 @@
-@using global::Blazor.FileReader
-@using Microsoft.AspNetCore.Components
-@using KnapsackProblem.Blazor.Data
-@inject IFileReaderService fileReaderService
+@using KnapsackProblem.BlazorApp.Data
 @inject ImplementationRegistry registry
 
-<input id="filepicker" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="display: none" />
-<input value="Add implementation(s)" type="button" onclick="document.getElementById('filepicker').click()" />
+<FilePicker AllowMultiple="true" ButtonText="Add implementations" OnFilesSelected="@AddImplementations" FilePickerId="pickinput"/>
 
 @code
 {
-    private ElementReference inputTypeFileElement;
-
-    private async Task ReadFile()
+    private async Task AddImplementations(IEnumerable<IFileReference> files)
     {
-        foreach (var file in await fileReaderService.CreateReference(inputTypeFileElement).EnumerateFilesAsync())
+        foreach (var file in files)
         {
-            registry.Add(file);
+            await registry.Add(file);
         }
     }
 }

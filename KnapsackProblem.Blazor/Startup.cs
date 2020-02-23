@@ -1,12 +1,12 @@
 using Blazor.FileReader;
-using KnapsackProblem.Blazor.Data;
+using KnapsackProblem.BlazorApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace KnapsackProblem.Blazor
+namespace KnapsackProblem.BlazorApp
 {
     public class Startup
     {

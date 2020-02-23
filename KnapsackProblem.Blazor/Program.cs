@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace KnapsackProblem.Blazor
+namespace KnapsackProblem.BlazorApp
 {
     public static class Program
     {

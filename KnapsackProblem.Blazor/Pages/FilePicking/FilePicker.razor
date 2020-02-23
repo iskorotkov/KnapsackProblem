@@ -4,11 +4,11 @@
 
 @if (AllowMultiple)
 {
-    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="@PickerStyle" />
+    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="@PickerStyle" />
 }
 else
 {
-    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="@PickerStyle" />
+    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="@PickerStyle" />
 }
 @if (!ShowSelectedFileName)
 {
@@ -30,6 +30,9 @@ else
 
     [Parameter]
     public bool ShowSelectedFileName { get; set; } = false;
+
+    [Parameter]
+    public string FileFormats { get; set; } = "";
 
     private string PickerStyle => ShowSelectedFileName ? "" : "display: none";
 

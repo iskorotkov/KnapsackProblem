@@ -9,23 +9,19 @@ namespace KnapsackProblem.BlazorApp.Data
 {
     public class InputService
     {
-        private IFileReference _file;
+        public KnapsackInput Input { get; private set; }
 
-        public async Task<KnapsackInput> Input()
+        public async Task SetFromFile(IFileReference file)
         {
-            await using var stream = await _file.CreateMemoryStreamAsync(4096);
+            await using var stream = await file.CreateMemoryStreamAsync(4096);
             using var reader = new StreamReader(stream);
             var content = reader.ReadToEnd();
-            return JsonConvert.DeserializeObject<KnapsackInput>(content);
-        }
-
-        public void SetFromFile(IFileReference file)
-        {
-            if (_file is IDisposable obj)
+            if (file is IDisposable obj)
             {
                 obj.Dispose();
             }
-            _file = file;
+
+            Input = JsonConvert.DeserializeObject<KnapsackInput>(content);
         }
     }
 }

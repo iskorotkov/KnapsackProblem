@@ -29,7 +29,7 @@
 @if (Items != null)
 {
     <div>
-        <AvailableItems Items="@Items" />
+        <AvailableItems Items="@Items" @ref="child"/>
     </div>
 }
 
@@ -37,10 +37,15 @@
 {
     public List<KnapsackItem> Items { get; set; }
 
+    private AvailableItems child;
+
     private async Task UpdateItems()
     {
-        var input = await InputService.Input();
-        Items = input.Items;
+        Items = InputService.Input?.Items;
+        //if (child != null)
+        //{
+        //    await child.Refresh();
+        //}
         await InvokeAsync(StateHasChanged);
     }
 }

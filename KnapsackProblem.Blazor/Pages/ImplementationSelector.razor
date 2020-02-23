@@ -21,4 +21,12 @@
     };
 
     private string Selected { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AvailableImplementations.Count > 0)
+        {
+            Selected = AvailableImplementations[0];
+        }
+    }
 }

@@ -5,20 +5,28 @@ Available items:
 <table>
     <thead>
         <tr>
-            <th width="20">Id</th>
-            <th width="300">Name</th>
-            <th width="80">Weight</th>
-            <th width="80">Cost</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Cost</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Items)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Weight</td>
-                <td>@item.Cost</td>
+                <td>
+                    <input type="text" @bind="@item.Id" />
+                </td>
+                <td>
+                    <input type="text" @bind="@item.Name" />
+                </td>
+                <td>
+                    <input type="text" @bind="@item.Weight" />
+                </td>
+                <td>
+                    <input type="text" @bind="@item.Cost" />
+                </td>
             </tr>
         }
     </tbody>

@@ -4,13 +4,16 @@
 
 @if (AllowMultiple)
 {
-    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="display: none" />
+    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="@PickerStyle" />
 }
 else
 {
-    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="display: none" />
+    <input id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="@PickerStyle" />
 }
-<input value="@ButtonText" type="button" onclick="document.getElementById('@FilePickerId').click()" />
+@if (!ShowSelectedFileName)
+{
+    <input value="@ButtonText" type="button" onclick="document.getElementById('@FilePickerId').click()" />
+}
 
 @code {
     [Parameter]
@@ -24,6 +27,11 @@ else
 
     [Parameter]
     public string FilePickerId { get; set; } = "filepicker";
+
+    [Parameter]
+    public bool ShowSelectedFileName { get; set; } = false;
+
+    private string PickerStyle => ShowSelectedFileName ? "" : "display: none";
 
     private ElementReference inputTypeFileElement;
 

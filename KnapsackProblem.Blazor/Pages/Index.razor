@@ -1,4 +1,9 @@
 ﻿@page "/"
+@using Data.Knapsack
+@using Data
+@using KnapsackProblem.BlazorApp.Pages.FilePicking
+@using KnapsackProblem.BlazorApp.Pages.KnapsackItems
+@inject InputService InputService
 
 <h1>Knapsack problem</h1>
 
@@ -16,3 +21,26 @@
     Select implementation
     <ImplementationSelector />
 </div>
+
+<div>
+    <button type="submit" @onclick="UpdateItems">Show items</button>
+</div>
+
+@if (Items != null)
+{
+    <div>
+        <AvailableItems Items="@Items" />
+    </div>
+}
+
+@code
+{
+    public List<KnapsackItem> Items { get; set; }
+
+    private async Task UpdateItems()
+    {
+        var input = await InputService.Input();
+        Items = input.Items;
+        await InvokeAsync(StateHasChanged);
+    }
+}

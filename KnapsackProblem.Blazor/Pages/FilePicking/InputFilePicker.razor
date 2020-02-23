@@ -1,0 +1,14 @@
+﻿@using System.IO
+@using KnapsackProblem.BlazorApp.Data
+@inject InputService input
+
+<FilePicker AllowMultiple="false" ButtonText="Select input file" OnFilesSelected="@ReadFile" FilePickerId="pickinput" ShowSelectedFileName="true" />
+
+@code
+{
+    private async Task ReadFile(IEnumerable<IFileReference> files)
+    {
+        var file = files.First();
+        input.SetFromFile(file);
+    }
+}

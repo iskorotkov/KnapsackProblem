@@ -4,11 +4,11 @@
 
 @if (AllowMultiple)
 {
-    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" multiple style="@PickerStyle" />
+    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=_element @onchange="ReadFile" multiple style="@PickerStyle" />
 }
 else
 {
-    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=inputTypeFileElement @onchange="ReadFile" style="@PickerStyle" />
+    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=_element @onchange="ReadFile" style="@PickerStyle" />
 }
 @if (!ShowSelectedFileName)
 {
@@ -36,11 +36,11 @@ else
 
     private string PickerStyle => ShowSelectedFileName ? "" : "display: none";
 
-    private ElementReference inputTypeFileElement;
+    private ElementReference _element;
 
     private async Task ReadFile()
     {
-        var files = await fileReaderService.CreateReference(inputTypeFileElement).EnumerateFilesAsync();
+        var files = await fileReaderService.CreateReference(_element).EnumerateFilesAsync();
         await OnFilesSelected(files);
     }
 }

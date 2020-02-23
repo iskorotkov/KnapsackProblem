@@ -2,14 +2,10 @@
 @using Microsoft.AspNetCore.Components
 @inject IFileReaderService fileReaderService
 
-@if (AllowMultiple)
-{
-    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=_element @onchange="ReadFile" multiple style="@PickerStyle" />
-}
-else
-{
-    <input accept="@FileFormats" id="@FilePickerId" type="file" @ref=_element @onchange="ReadFile" style="@PickerStyle" />
-}
+<input accept="@FileFormats" id="@FilePickerId" type="file" @ref=_element @onchange="ReadFile"
+       multiple="@AllowMultiple"
+       style="@(ShowSelectedFileName ? "" : "display: none")" />
+
 @if (!ShowSelectedFileName)
 {
     <input value="@ButtonText" type="button" onclick="document.getElementById('@FilePickerId').click()" />
@@ -33,8 +29,6 @@ else
 
     [Parameter]
     public string FileFormats { get; set; } = "";
-
-    private string PickerStyle => ShowSelectedFileName ? "" : "display: none";
 
     private ElementReference _element;
 

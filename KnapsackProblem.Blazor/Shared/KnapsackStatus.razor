@@ -1,5 +1,6 @@
 ﻿@using KnapsackProblem.BlazorApp.Data
 @inject InputService inputService
+@implements IDisposable
 
 <h3>Knapsack status</h3>
 
@@ -19,5 +20,10 @@
     protected override void OnInitialized()
     {
         inputService.InputUpdated += UpdateKnapsack;
+    }
+
+    public void Dispose()
+    {
+        inputService.InputUpdated -= UpdateKnapsack;
     }
 }

@@ -12,12 +12,12 @@ Available items:
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Items)
+        @for (var i = 0; i < Items.Count; i++)
         {
+            var item = Items[i];
+            var index = i;
             <tr>
-                <td>
-                    <input type="text" @bind="@item.Id" />
-                </td>
+                <td>@(i + 1)</td>
                 <td>
                     <input type="text" @bind="@item.Name" />
                 </td>
@@ -27,12 +27,30 @@ Available items:
                 <td>
                     <input type="text" @bind="@item.Cost" />
                 </td>
+                <td>
+                    <button @onclick="() => RemoveItem(index)">Remove</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<div>
+    <input type="button" @onclick="CreateNewItem" value="Add new item" />
+</div>
+
 @code {
     [Parameter]
     public List<KnapsackItem> Items { get; set; }
+
+    private void CreateNewItem()
+    {
+        var item = new KnapsackItem();
+        Items.Add(item);
+    }
+
+    private void RemoveItem(int index)
+    {
+        Items.RemoveAt(index);
+    }
 }

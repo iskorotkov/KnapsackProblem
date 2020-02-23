@@ -22,10 +22,10 @@ Available items:
                     <input type="text" @bind="@item.Name" />
                 </td>
                 <td>
-                    <input type="text" @bind="@item.Weight" />
+                    <input type="number" @bind="@item.Weight" />
                 </td>
                 <td>
-                    <input type="text" @bind="@item.Cost" />
+                    <input type="number" @bind="@item.Cost" />
                 </td>
                 <td>
                     <button @onclick="() => RemoveItem(index)">Remove</button>

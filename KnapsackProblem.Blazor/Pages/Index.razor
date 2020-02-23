@@ -26,22 +26,22 @@
     <button type="submit" @onclick="UpdateItems">Show items</button>
 </div>
 
-@if (Items != null)
-{
-    <div>
-        <AvailableItems Items="@Items" @ref="child"/>
-    </div>
-}
+
+<div>
+    <AvailableItems Items="@Items" />
+</div>
 
 @code
 {
     public List<KnapsackItem> Items { get; set; }
 
-    private AvailableItems child;
-
-    private async Task UpdateItems()
+    private void UpdateItems()
     {
-        Items = InputService.Input?.Items;
-        await InvokeAsync(StateHasChanged);
+        Items = InputService.Input.Items;
+    }
+
+    protected override void OnInitialized()
+    {
+        UpdateItems();
     }
 }

@@ -9,7 +9,7 @@ namespace KnapsackProblem.BlazorApp.Data
 {
     public class InputService
     {
-        public KnapsackInput Input { get; private set; }
+        public KnapsackInput Input { get; private set; } = new KnapsackInput();
 
         public async Task SetFromFile(IFileReference file)
         {

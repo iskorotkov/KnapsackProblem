@@ -13,6 +13,8 @@ namespace KnapsackProblem.BlazorApp.Data
         public List<ISolver> Implementations { get; } = new List<ISolver>();
         public ISolver Selected { get; set; }
 
+        public event Action ImplementationAdded;
+
         public async Task Add(IFileReference file)
         {
             using var stream = await file.CreateMemoryStreamAsync();
@@ -20,11 +22,17 @@ namespace KnapsackProblem.BlazorApp.Data
             var assembly = Assembly.Load(bytes);
             var solverTypes = assembly
                 .GetExportedTypes()
-                .Where(t => typeof(ISolver).IsAssignableFrom(t));
+                .Where(t => typeof(ISolver).IsAssignableFrom(t))
+                .ToList();
             foreach (var type in solverTypes)
             {
                 var solver = (ISolver)Activator.CreateInstance(type);
                 Implementations.Add(solver);
+            }
+
+            if (solverTypes.Count > 0)
+            {
+                ImplementationAdded?.Invoke();
             }
         }
     }

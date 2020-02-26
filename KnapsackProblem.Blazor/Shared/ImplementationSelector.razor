@@ -1,6 +1,7 @@
 ﻿@using Data
 @using Knapsack
 @inject ImplementationRegistryService registryService
+@implements IDisposable
 
 <div>
     <select>
@@ -14,8 +15,19 @@
 
 @code
 {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        registryService.ImplementationAdded += StateHasChanged;
+    }
+
     private void OnImplChange(ISolver selected)
     {
         registryService.Selected = selected;
+    }
+
+    public void Dispose()
+    {
+        registryService.ImplementationAdded -= StateHasChanged;
     }
 }

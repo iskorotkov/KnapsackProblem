@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Integration12">
-      <HintPath>..\ISolver.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\KnapsackProblem.Interface\KnapsackProblem.Interface.csproj" />
   </ItemGroup>
 
 </Project>

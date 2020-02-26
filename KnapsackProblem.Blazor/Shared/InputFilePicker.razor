@@ -1,17 +1,20 @@
 ﻿@using KnapsackProblem.BlazorApp.Data
 @inject InputService Input
 
-<FilePicker AllowMultiple="false" ButtonText="Select input file" OnFilesSelected="ReadFile" FilePickerId="pickinput"
-            ShowSelectedFileName="true" FileFormats=".json" />
+<FilePicker Title="Select input file" AllowMultiple="false" OnFilesSelected="ReadFile" FileFormats=".json" />
 
 @code
 {
+    [Parameter]
+    public EventCallback<IFileReference> NewValuesRead { get; set; }
+
     private async Task ReadFile(IEnumerable<IFileReference> files)
     {
         if (files.Any())
         {
             var file = files.First();
             await Input.SetFromFile(file);
+            await NewValuesRead.InvokeAsync(file);
         }
     }
 }

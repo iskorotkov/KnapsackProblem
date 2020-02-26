@@ -1,37 +1,18 @@
 ﻿@page "/"
 @using Data.Knapsack
 @using Data
-@using Shared
 @inject InputService InputService
 
 <h1>Knapsack problem</h1>
 
-<div>
-    Add implementation
-    <ImplementationPicker />
-</div>
+<ImplementationPicker />
+<InputFilePicker NewValuesRead="UpdateItems" />
 
-<div>
-    Select input file
-    <InputFilePicker />
-</div>
+<ImplementationSelector />
 
-<div>
-    Select implementation
-    <ImplementationSelector />
-</div>
+<KnapsackStatus />
 
-<div>
-    <button type="submit" @onclick="UpdateItems">Show items</button>
-</div>
-
-<div>
-    <KnapsackStatus />
-</div>
-
-<div>
-    <AvailableItems Items="@Items" />
-</div>
+<AvailableItems Items="@Items" />
 
 @code
 {

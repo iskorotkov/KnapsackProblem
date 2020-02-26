@@ -28,7 +28,7 @@ Available items:
                     <input type="number" @bind="@item.Cost" />
                 </td>
                 <td>
-                    <button @onclick="() => RemoveItem(index)">Remove</button>
+                    <input type="button" value="Remove" @onclick="() => RemoveItem(index)" />
                 </td>
             </tr>
         }

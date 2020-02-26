@@ -1,27 +1,21 @@
-﻿<div>
-    <select title="Select implementation" @bind="Selected">
-        @foreach (var impl in AvailableImplementations)
+﻿@using Data
+@using Knapsack
+@inject ImplementationRegistryService registryService
+
+<div>
+    <select>
+        @foreach (var impl in registryService.Implementations)
         {
-            <option>@impl</option>
+            var implementation = impl;
+            <option onclick="() => OnImplChange(implementation)">@impl.GetName()</option>
         }
     </select>
 </div>
 
 @code
 {
-    private List<string> AvailableImplementations { get; } = new List<string>
-{
-        "option 1",
-        "option 2"
-    };
-
-    private string Selected { get; set; }
-
-    protected override void OnInitialized()
+    private void OnImplChange(ISolver selected)
     {
-        if (AvailableImplementations.Count > 0)
-        {
-            Selected = AvailableImplementations[0];
-        }
+        registryService.Selected = selected;
     }
 }

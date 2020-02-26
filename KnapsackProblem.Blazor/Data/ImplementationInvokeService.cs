@@ -1,4 +1,4 @@
-﻿using KnapsackProblem.BlazorApp.Data.Implementations;
+﻿using Knapsack;
 using System.Linq;
 
 namespace KnapsackProblem.BlazorApp.Data

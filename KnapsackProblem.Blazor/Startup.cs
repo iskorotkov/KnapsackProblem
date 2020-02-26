@@ -25,8 +25,9 @@ namespace KnapsackProblem.BlazorApp
             services.AddServerSideBlazor();
             services.AddFileReaderService();
 
-            services.AddSingleton<ImplementationRegistryService>();
-            services.AddSingleton<InputService>();
+            services.AddScoped<ImplementationRegistryService>();
+            services.AddScoped<InputService>();
+            services.AddScoped<ImplementationInvokeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

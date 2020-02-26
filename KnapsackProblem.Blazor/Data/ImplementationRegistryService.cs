@@ -1,5 +1,5 @@
 ﻿using Blazor.FileReader;
-using KnapsackProblem.BlazorApp.Data.Implementations;
+using Knapsack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace KnapsackProblem.BlazorApp.Data
     public class ImplementationRegistryService
     {
         public List<ISolver> Implementations { get; } = new List<ISolver>();
+        public ISolver Selected { get; set; }
 
         public async Task Add(IFileReference file)
         {
@@ -19,7 +20,7 @@ namespace KnapsackProblem.BlazorApp.Data
             var assembly = Assembly.Load(bytes);
             var solverTypes = assembly
                 .GetExportedTypes()
-                .Where(t => t.IsAssignableFrom(typeof(ISolver)));
+                .Where(t => typeof(ISolver).IsAssignableFrom(t));
             foreach (var type in solverTypes)
             {
                 var solver = (ISolver)Activator.CreateInstance(type);

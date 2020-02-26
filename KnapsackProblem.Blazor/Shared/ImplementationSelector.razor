@@ -7,11 +7,6 @@
     </select>
 </div>
 
-@if (Selected != null)
-{
-    <div>Selected option is '@Selected'.</div>
-}
-
 @code
 {
     private List<string> AvailableImplementations { get; } = new List<string>
@@ -22,7 +17,7 @@
 
     private string Selected { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         if (AvailableImplementations.Count > 0)
         {

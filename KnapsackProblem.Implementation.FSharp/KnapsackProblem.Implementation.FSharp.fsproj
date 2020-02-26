@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KnapsackProblem.Interface\KnapsackProblem.Interface.csproj" />
+    <Reference Include="KnapsackProblem.Interface">
+      <HintPath>..\KnapsackProblem.Interface\bin\Release\netstandard2.0\KnapsackProblem.Interface.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

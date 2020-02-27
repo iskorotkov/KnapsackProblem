@@ -31,7 +31,7 @@ Available items:
                     <input type="button" value="Remove" @onclick="() => RemoveItem(index)" />
                 </td>
                 <td>
-                    @if (Picked != null && Picked[index])
+                    @if (Picked != null && Picked.Length > 0 && Picked[index])
                     {
                         <div>+</div>
                     }

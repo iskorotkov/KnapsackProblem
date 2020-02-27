@@ -8,7 +8,8 @@
         var implementations = registryService.Implementations;
         for (var i = 0; i < implementations.Count; i++)
         {
-            <option value="@i">@implementations[i].GetName()</option>
+            var index = i;
+            <option value="@index">@implementations[index].GetName()</option>
         }
     }
 </select>

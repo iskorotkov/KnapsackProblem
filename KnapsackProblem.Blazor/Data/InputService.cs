@@ -16,7 +16,7 @@ namespace KnapsackProblem.BlazorApp.Data
             Items = new List<KnapsackItem>()
         };
 
-        public event Func<Task> InputUpdated;
+        public event Action InputUpdated;
 
         public async Task SetFromFile(IFileReference file)
         {

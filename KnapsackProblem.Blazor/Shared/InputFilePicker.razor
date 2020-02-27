@@ -1,7 +1,7 @@
 ﻿@using KnapsackProblem.BlazorApp.Data
 @inject InputService Input
 
-<FilePicker Title="Select input file" AllowMultiple="false" OnFilesSelected="@ReadFile" FileFormats=".json" />
+<FilePicker Title="Select input file" AllowMultiple="false" OnFilesSelected="ReadFile" FileFormats=".json" />
 
 @code
 {

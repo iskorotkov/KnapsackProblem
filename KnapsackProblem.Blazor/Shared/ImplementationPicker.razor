@@ -1,7 +1,7 @@
 @using KnapsackProblem.BlazorApp.Data
 @inject ImplementationRegistryService Registry
 
-<FilePicker Title="Add implementations" AllowMultiple="true" OnFilesSelected="@AddImplementations" FileFormats=".dll" />
+<FilePicker Title="Add implementations" AllowMultiple="true" OnFilesSelected="AddImplementations" FileFormats=".dll" />
 
 @code
 {

@@ -5,18 +5,20 @@ open System
 
 type public MySuperSolver() =
   interface ISolver with
-    member _this.GetName() = "Самый лучший алгоритм"
-    member _this.Solve(M, m, c) =
-      let weights = List.ofArray m
+    member _this.GetName() = "Точный переборный алгоритм Ивана"
+    member _this.Solve(max, w, c) =
+      let weights = List.ofArray w
       let costs = List.ofArray c
-      let rec solve max (weights, costs) (curWeight, curCost, curFlags) =
-        if curWeight > max then (0, [])
+      let rec solve available (weights, costs) (curCost, curFlags) =
+        if available <= 0 then (0, [])
         else match (weights, costs) with
               | ([], []) -> (curCost, curFlags)
-              | (wh::wt, ch::ct) ->
-                  let res1 = solve max (wt, ct) (curWeight, curCost, false::curFlags)
-                  let res2 = solve max (wt, ct) (curWeight+wh, curCost+ch, true::curFlags)
+              | (weight::wtail, cost::ctail) ->
+                  let res1 = solve available (wtail, ctail) (curCost, false::curFlags)
+                  let res2 = solve (available-weight) (wtail, ctail) (curCost+cost, true::curFlags)
                   if fst res1 > fst res2 then res1 else res2
               | _ -> (0, [])
-      let represent max weights costs = List.rev (snd (solve max (weights, costs) (0, 0, [])))
-      List.toArray (represent M weights costs)
+      solve max (weights, costs) (0, [])
+      |> snd
+      |> List.rev
+      |> List.toArray

@@ -1,10 +1,8 @@
-﻿@using Blazor.FileReader
-@using Microsoft.AspNetCore.Components
-@inject IFileReaderService fileReaderService
+﻿@inject IFileReaderService FileReaderService
 
-<input accept="@FileFormats" id="@_filePickerGuid" type="file" @ref=_element @onchange="ReadFile"
-       multiple="@AllowMultiple"
-       style="display: none" />
+<input accept="@FileFormats" id="@_filePickerGuid" multiple="@AllowMultiple" @onchange="@ReadFile" @ref="@_element"
+       style="display: none"
+       type="file"/>
 
 <input value="@Title" type="button" onclick="document.getElementById('@_filePickerGuid').click()" />
 
@@ -22,11 +20,11 @@
     public string FileFormats { get; set; } = "";
 
     private ElementReference _element;
-    private Guid _filePickerGuid = Guid.NewGuid();
+    private readonly Guid _filePickerGuid = Guid.NewGuid();
 
     private async Task ReadFile()
     {
-        var reader = fileReaderService.CreateReference(_element);
+        var reader = FileReaderService.CreateReference(_element);
         var files = await reader.EnumerateFilesAsync();
         await OnFilesSelected.InvokeAsync(files);
         await reader.ClearValue();

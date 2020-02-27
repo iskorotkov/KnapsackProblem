@@ -8,21 +8,20 @@
 
 <ImplementationPicker />
 
-<InputFilePicker NewValuesRead="UpdateItems" />
+<InputFilePicker NewValuesRead="@UpdateItems" />
 
 <ImplementationSelector />
 
 <KnapsackStatus />
 
-<AvailableItems Items="@Items" Picked="_picked" />
+<AvailableItems Items="@Items" Picked="Picked" />
 
-<input value="Process" type="button" @onclick="Process" />
+<input value="Process" type="button" @onclick="@Process" />
 
 @code
 {
-    public List<KnapsackItem> Items { get; set; }
-
-    private bool[] _picked { get; set; }
+    private List<KnapsackItem> Items { get; set; }
+    private List<bool> Picked { get; set; }
 
     private void UpdateItems()
     {
@@ -36,6 +35,6 @@
 
     private void Process()
     {
-        _picked = Invoker.InvokeSelected();
+        Picked = Invoker.InvokeSelected().ToList();
     }
 }

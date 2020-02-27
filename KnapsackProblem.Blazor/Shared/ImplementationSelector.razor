@@ -1,11 +1,11 @@
 ﻿@using Data
-@inject ImplementationRegistryService registryService
+@inject ImplementationRegistryService RegistryService
 @implements IDisposable
 
-<select @onchange="OnSelected">
+<select @onchange="@OnSelected">
     <option selected hidden disabled>Select implementation...</option>
     @{
-        var implementations = registryService.Implementations;
+        var implementations = RegistryService.Implementations;
         for (var i = 0; i < implementations.Count; i++)
         {
             var index = i;
@@ -20,21 +20,21 @@
     {
         if (int.TryParse(args.Value.ToString(), out var index))
         {
-            registryService.Select(index);
+            RegistryService.Select(index);
         }
         else
         {
-            registryService.Deselect();
+            RegistryService.Deselect();
         }
     }
 
     protected override void OnInitialized()
     {
-        registryService.ImplementationAdded += StateHasChanged;
+        RegistryService.ImplementationAdded += StateHasChanged;
     }
 
     public void Dispose()
     {
-        registryService.ImplementationAdded -= StateHasChanged;
+        RegistryService.ImplementationAdded -= StateHasChanged;
     }
 }

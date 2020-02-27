@@ -17,23 +17,33 @@ namespace KnapsackProblem.BlazorApp.Data
 
         public async Task Add(IFileReference file)
         {
-            using var stream = await file.CreateMemoryStreamAsync();
-            var bytes = stream.ToArray();
-            var assembly = Assembly.Load(bytes);
-            var solverTypes = assembly
-                .GetExportedTypes()
-                .Where(t => typeof(ISolver).IsAssignableFrom(t))
-                .ToList();
-            foreach (var type in solverTypes)
+            List<Type> solverTypes;
+            await using (var stream = await file.CreateMemoryStreamAsync())
             {
-                var solver = (ISolver)Activator.CreateInstance(type);
-                Implementations.Add(solver);
+                var bytes = stream.ToArray();
+                var assembly = Assembly.Load(bytes);
+                solverTypes = assembly
+                    .GetExportedTypes()
+                    .Where(t => typeof(ISolver).IsAssignableFrom(t))
+                    .ToList();
+                foreach (var type in solverTypes)
+                {
+                    ISolver solver;
+                    try
+                    {
+                        solver = (ISolver) Activator.CreateInstance(type);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+
+                    if (solver != null) Implementations.Add(solver);
+                }
             }
 
-            if (solverTypes.Count > 0)
-            {
-                ImplementationAdded?.Invoke();
-            }
+            if (solverTypes.Count == 0) throw new NoImplementationException();
+            ImplementationAdded?.Invoke();
         }
 
         public void Select(int index)

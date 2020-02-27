@@ -1,5 +1,4 @@
 ﻿@using Data.Knapsack
-@using Microsoft.AspNetCore.Components
 
 Available items:
 <table>
@@ -28,10 +27,10 @@ Available items:
                     <input type="number" @bind="@item.Cost" />
                 </td>
                 <td>
-                    <input type="button" value="Remove" @onclick="() => RemoveItem(index)" />
+                    <input type="button" value="Remove" @onclick="@(() => RemoveItem(index))" />
                 </td>
                 <td>
-                    @if (Picked != null && Picked.Length > 0 && Picked[index])
+                    @if (Picked != null && Picked.Count > index && Picked[index])
                     {
                         <div>+</div>
                     }
@@ -42,7 +41,7 @@ Available items:
 </table>
 
 <div>
-    <input type="button" @onclick="CreateNewItem" value="Add new item" />
+    <input type="button" @onclick="@CreateNewItem" value="Add new item" />
 </div>
 
 @code {
@@ -50,7 +49,7 @@ Available items:
     public List<KnapsackItem> Items { get; set; }
 
     [Parameter]
-    public bool[] Picked { get; set; }
+    public List<bool> Picked { get; set; }
 
     private void CreateNewItem()
     {
@@ -61,5 +60,6 @@ Available items:
     private void RemoveItem(int index)
     {
         Items.RemoveAt(index);
+        Picked.RemoveAt(index);
     }
 }

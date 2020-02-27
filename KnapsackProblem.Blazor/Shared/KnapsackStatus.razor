@@ -1,27 +1,27 @@
 ﻿@using KnapsackProblem.BlazorApp.Data
-@inject InputService inputService
+@inject InputService InputService
 @implements IDisposable
 
 <div>
-    Capacity: <input type="number" @bind="@_knapsack.MaxWeight" />
+    Capacity: <input type="number" @bind="@Knapsack.MaxWeight" />
 </div>
 
 @code {
-    private Data.Knapsack.Knapsack _knapsack { get; set; }
+    private Data.Knapsack.Knapsack Knapsack { get; set; }
 
     private void UpdateKnapsack()
     {
-        _knapsack = inputService.Input.Knapsack;
+        Knapsack = InputService.Input.Knapsack;
     }
 
     protected override void OnInitialized()
     {
         UpdateKnapsack();
-        inputService.InputUpdated += UpdateKnapsack;
+        InputService.InputUpdated += UpdateKnapsack;
     }
 
     public void Dispose()
     {
-        inputService.InputUpdated -= UpdateKnapsack;
+        InputService.InputUpdated -= UpdateKnapsack;
     }
 }

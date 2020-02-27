@@ -2,6 +2,7 @@
 @using Data.Knapsack
 @using Data
 @inject InputService InputService
+@inject ImplementationInvokeService Invoker
 
 <h1>Knapsack problem</h1>
 
@@ -13,11 +14,15 @@
 
 <KnapsackStatus />
 
-<AvailableItems Items="@Items" />
+<AvailableItems Items="@Items" Picked="_picked" />
+
+<input value="Process" type="button" @onclick="Process" />
 
 @code
 {
     public List<KnapsackItem> Items { get; set; }
+
+    private bool[] _picked { get; set; }
 
     private void UpdateItems()
     {
@@ -27,5 +32,10 @@
     protected override void OnInitialized()
     {
         UpdateItems();
+    }
+
+    private void Process()
+    {
+        _picked = Invoker.InvokeSelected();
     }
 }

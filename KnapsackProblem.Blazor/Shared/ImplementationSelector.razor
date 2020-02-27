@@ -1,29 +1,35 @@
 ﻿@using Data
-@using Knapsack
 @inject ImplementationRegistryService registryService
 @implements IDisposable
 
-<div>
-    <select>
-        @foreach (var impl in registryService.Implementations)
+<select @onchange="OnSelected">
+    <option selected hidden disabled>Select implementation...</option>
+    @{
+        var implementations = registryService.Implementations;
+        for (var i = 0; i < implementations.Count; i++)
         {
-            var implementation = impl;
-            <option onclick="() => OnImplChange(implementation)">@impl.GetName()</option>
+            <option value="@i">@implementations[i].GetName()</option>
         }
-    </select>
-</div>
+    }
+</select>
 
 @code
 {
-    protected override void OnInitialized()
+    private void OnSelected(ChangeEventArgs args)
     {
-        base.OnInitialized();
-        registryService.ImplementationAdded += StateHasChanged;
+        if (int.TryParse(args.Value.ToString(), out var index))
+        {
+            registryService.Select(index);
+        }
+        else
+        {
+            registryService.Deselect();
+        }
     }
 
-    private void OnImplChange(ISolver selected)
+    protected override void OnInitialized()
     {
-        registryService.Selected = selected;
+        registryService.ImplementationAdded += StateHasChanged;
     }
 
     public void Dispose()

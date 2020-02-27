@@ -5,6 +5,6 @@ namespace KnapsackProblem.BlazorApp.Data.Knapsack
     public class KnapsackInput
     {
         public Knapsack Knapsack { get; set; }
-        public List<KnapsackItem> Items { get; set; } = new List<KnapsackItem>();
+        public List<KnapsackItem> Items { get; set; }
     }
 }

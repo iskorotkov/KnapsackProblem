@@ -30,6 +30,12 @@ Available items:
                 <td>
                     <input type="button" value="Remove" @onclick="() => RemoveItem(index)" />
                 </td>
+                <td>
+                    @if (Picked != null && Picked[index])
+                    {
+                        <div>+</div>
+                    }
+                </td>
             </tr>
         }
     </tbody>
@@ -42,6 +48,9 @@ Available items:
 @code {
     [Parameter]
     public List<KnapsackItem> Items { get; set; }
+
+    [Parameter]
+    public bool[] Picked { get; set; }
 
     private void CreateNewItem()
     {

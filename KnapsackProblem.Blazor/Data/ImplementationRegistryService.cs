@@ -11,7 +11,7 @@ namespace KnapsackProblem.BlazorApp.Data
     public class ImplementationRegistryService
     {
         public List<ISolver> Implementations { get; } = new List<ISolver>();
-        public ISolver Selected { get; set; }
+        public ISolver Selected { get; private set; }
 
         public event Action ImplementationAdded;
 
@@ -34,6 +34,16 @@ namespace KnapsackProblem.BlazorApp.Data
             {
                 ImplementationAdded?.Invoke();
             }
+        }
+
+        public void Select(int index)
+        {
+            Selected = Implementations[index];
+        }
+
+        public void Deselect()
+        {
+            Selected = null;
         }
     }
 }

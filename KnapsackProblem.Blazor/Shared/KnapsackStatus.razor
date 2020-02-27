@@ -5,7 +5,7 @@
 <h3>Knapsack status</h3>
 
 <div>
-    Capacity: <input type="number" value="@(_knapsack != null ? _knapsack.MaxWeight : 50)" />
+    Capacity: <input type="number" value="@_knapsack.MaxWeight" />
 </div>
 
 @code {
@@ -14,11 +14,12 @@
     private async Task UpdateKnapsack()
     {
         _knapsack = inputService.Input.Knapsack;
-        await InvokeAsync(StateHasChanged);
+        //await InvokeAsync(StateHasChanged);
     }
 
     protected override void OnInitialized()
     {
+        UpdateKnapsack();
         inputService.InputUpdated += UpdateKnapsack;
     }
 

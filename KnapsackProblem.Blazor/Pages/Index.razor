@@ -6,17 +6,25 @@
 
 <h1>Knapsack problem</h1>
 
-<ImplementationPicker />
+<form @onsubmit="Process">
+    <div class="m-2">
+        <InputFilePicker NewValuesRead="@UpdateItems" />
+        <ImplementationPicker />
+    </div>
+    <div class="row m-2">
+        <ImplementationSelector />
+    </div>
 
-<InputFilePicker NewValuesRead="@UpdateItems" />
+    <div class="row m-2">
+        <KnapsackStatus />
+    </div>
 
-<ImplementationSelector />
+    <div class="m-2">
+        <AvailableItems Items="@Items" Picked="Picked" />
+    </div>
 
-<KnapsackStatus />
-
-<AvailableItems Items="@Items" Picked="Picked" />
-
-<input value="Process" type="button" @onclick="@Process" />
+    <button type="submit" class="btn btn-primary m-2">Process</button>
+</form>
 
 @code
 {

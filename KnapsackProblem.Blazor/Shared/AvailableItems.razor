@@ -1,13 +1,15 @@
 ﻿@using Data.Knapsack
 
 Available items:
-<table>
+<table cellpadding="2" class="table table-bordered">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Weight</th>
             <th>Cost</th>
+            <th>Is taken</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -15,33 +17,33 @@ Available items:
         {
             var item = Items[i];
             var index = i;
-            <tr>
-                <td>@(i + 1)</td>
-                <td>
-                    <input type="text" @bind="@item.Name" />
-                </td>
-                <td>
-                    <input type="number" @bind="@item.Weight" />
-                </td>
-                <td>
-                    <input type="number" @bind="@item.Cost" />
-                </td>
-                <td>
-                    <input type="button" value="Remove" @onclick="@(() => RemoveItem(index))" />
-                </td>
-                <td>
-                    @if (Picked != null && Picked.Count > index && Picked[index])
-                    {
-                        <div>+</div>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>@(i + 1)</td>
+            <td>
+                <input type="text" @bind="@item.Name" />
+            </td>
+            <td>
+                <input type="number" @bind="@item.Weight" min="0" />
+            </td>
+            <td>
+                <input type="number" @bind="@item.Cost" min="0" />
+            </td>
+            <td>
+                @if (IsSelected(i))
+                {
+                    <div>+</div>
+                }
+            </td>
+            <td>
+                <input type="button" class="btn btn-link" value="Remove" @onclick="@(() => RemoveItem(index))" />
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
 <div>
-    <input type="button" @onclick="@CreateNewItem" value="Add new item" />
+    <input class="btn btn-outline-dark" type="button" @onclick="@CreateNewItem" value="Add new item" />
 </div>
 
 @code {
@@ -60,6 +62,14 @@ Available items:
     private void RemoveItem(int index)
     {
         Items.RemoveAt(index);
-        Picked.RemoveAt(index);
+        if (Picked?.Count > index)
+        {
+            Picked.RemoveAt(index);
+        }
+    }
+
+    private bool IsSelected(int index)
+    {
+        return Picked != null && Picked.Count > index && Picked[index];
     }
 }

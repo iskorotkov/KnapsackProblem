@@ -2,9 +2,8 @@
 @inject InputService InputService
 @implements IDisposable
 
-<div>
-    Capacity: <input type="number" @bind="@Knapsack.MaxWeight" />
-</div>
+<label for="weight">Capacity</label>
+<input id="weight" type="number" @bind="@Knapsack.MaxWeight" min="0" required />
 
 @code {
     private Data.Knapsack.Knapsack Knapsack { get; set; }

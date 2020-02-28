@@ -1,40 +1,48 @@
 ﻿@using Data
+@using Knapsack 
 @inject ImplementationRegistryService RegistryService
 @implements IDisposable
 
-<select @onchange="@OnSelected">
-    <option selected hidden disabled>Select implementation...</option>
+<label for="selector">Select implementation</label>
+<select id="selector" @onchange="OnSelected" class="custom-select-sm m-1" required>
     @{
-        var implementations = RegistryService.Implementations;
-        for (var i = 0; i < implementations.Count; i++)
+        for (var i = 0; i < _implementations.Count; i++)
         {
             var index = i;
-            <option value="@index">@implementations[index].GetName()</option>
+            <option value="@index">@_implementations[index].GetName()</option>
         }
     }
 </select>
 
 @code
 {
+    private List<ISolver> _implementations;
+    private bool _hasSelection = false;
+
     private void OnSelected(ChangeEventArgs args)
     {
-        if (int.TryParse(args.Value.ToString(), out var index))
+        var index = int.Parse(args.Value.ToString());
+        RegistryService.Select(index);
+    }
+
+    private void ImplementationsAdded()
+    {
+        if (!_hasSelection && _implementations.Count > 0)
         {
-            RegistryService.Select(index);
+            _hasSelection = true;
+            RegistryService.Select(0);
         }
-        else
-        {
-            RegistryService.Deselect();
-        }
+        StateHasChanged();
     }
 
     protected override void OnInitialized()
     {
-        RegistryService.ImplementationAdded += StateHasChanged;
+        _implementations = RegistryService.Implementations;
+        RegistryService.ImplementationAdded += ImplementationsAdded;
     }
 
     public void Dispose()
     {
-        RegistryService.ImplementationAdded -= StateHasChanged;
+        RegistryService.ImplementationAdded -= ImplementationsAdded;
     }
 }

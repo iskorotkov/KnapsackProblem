@@ -12,25 +12,28 @@
         </tr>
     </thead>
     <tbody>
-        @for (var i = 0; i < Items.Count; i++)
+        @if (Items != null)
         {
-            var item = Items[i];
-            var index = i;
-            <tr class="@(IsSelected(i) ? "table-success" : "")">
-                <td>@(i + 1)</td>
-                <td>
-                    <input type="text" @bind="@item.Name" />
-                </td>
-                <td>
-                    <input type="number" @bind="@item.Weight" min="0" />
-                </td>
-                <td>
-                    <input type="number" @bind="@item.Cost" min="0" />
-                </td>
-                <td>
-                    <input type="button" class="btn btn-link" value="Remove" @onclick="@(() => RemoveItem(index))" />
-                </td>
-            </tr>
+            @for (var i = 0; i < Items.Count; i++)
+            {
+                var item = Items[i];
+                var index = i;
+                <tr class="@(IsSelected(i) ? "table-success" : "")">
+                    <td>@(i + 1)</td>
+                    <td>
+                        <input type="text" @bind="@item.Name"/>
+                    </td>
+                    <td>
+                        <input type="number" @bind="@item.Weight" min="0"/>
+                    </td>
+                    <td>
+                        <input type="number" @bind="@item.Cost" min="0"/>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-link" value="Remove" @onclick="@(() => RemoveItem(index))"/>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

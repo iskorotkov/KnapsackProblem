@@ -29,8 +29,13 @@ namespace KnapsackProblem.BlazorApp.Data
                 obj.Dispose();
             }
 
-            Input = JsonConvert.DeserializeObject<KnapsackInput>(content);
+            var decerialized = JsonConvert.DeserializeObject<KnapsackInput>(content);
+            if (decerialized?.Items == null || decerialized.Knapsack == null)
+            {
+                throw new InvalidInputFileException();
+            }
 
+            Input = decerialized;
             InputUpdated?.Invoke();
         }
     }

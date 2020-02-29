@@ -3,19 +3,11 @@
 
 <FilePicker Title="Add implementations" AllowMultiple="true" OnFilesSelected="AddImplementations" FileFormats=".dll" />
 
-@if (!string.IsNullOrWhiteSpace(_errorMessage))
-{
-    <ErrorMessage Message="@_errorMessage" OnCloseMessage="@ClearMessage" />
-}
+<ErrorMessage @ref="ErrorMessage" />
 
 @code
 {
-    private string _errorMessage;
-
-    private void ClearMessage()
-    {
-        _errorMessage = null;
-    }
+    private ErrorMessage ErrorMessage { get; set; }
 
     private async Task AddImplementations(IEnumerable<IFileReference> files)
     {
@@ -27,11 +19,15 @@
             }
             catch (BadImageFormatException)
             {
-                _errorMessage = "One of the selected files isn't a valid DLL.";
+                ErrorMessage.Show("One of the selected files isn't a valid DLL.");
             }
             catch (NoImplementationException)
             {
-                _errorMessage = "One of the selected DLLs doesn't contain any exported solver classes with public default constructor";
+                ErrorMessage.Show("One of the selected DLLs doesn't contain any exported solver classes with public default constructor");
+            }
+            catch
+            {
+                ErrorMessage.Show("Unknown error occured while adding new implementations");
             }
         }
     }

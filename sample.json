@@ -1,0 +1,37 @@
+{
+    "Knapsack": {
+        "MaxWeight": 100
+    },
+    "Items": [
+        {
+            "Name": "Яблоко",
+            "Weight": 10,
+            "Cost": 20
+        },
+        {
+            "Name": "Машина",
+            "Weight": 400,
+            "Cost": 1000000
+        },
+        {
+            "Name": "Учебник",
+            "Weight": 15,
+            "Cost": 18
+        },
+        {
+            "Name": "Хорошее настроение",
+            "Weight": 75,
+            "Cost": 50
+        },
+        {
+            "Name": "Ноутбук",
+            "Weight": 60,
+            "Cost": 50
+        },
+        {
+            "Name": "Проездной",
+            "Weight": 1,
+            "Cost": 1
+        }
+    ]
+}

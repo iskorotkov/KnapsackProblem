@@ -1,6 +1,4 @@
-﻿@using Data.Knapsack
-
-<h3>Available items:</h3>
+﻿<h3>Available items:</h3>
 <table class="table table-bordered table-responsive">
     <thead>
         <tr>
@@ -41,9 +39,15 @@
 <input class="btn btn-outline-dark" type="button" @onclick="@CreateNewItem" value="Add new item" />
 
 @code {
+    /// <summary>
+    /// Объекты, помещаемые в рюкзак.
+    /// </summary>
     [Parameter]
     public List<KnapsackItem> Items { get; set; }
 
+    /// <summary>
+    /// Список флагов, показывающих, нужно ли класть объект с данным индексом в рюкзак.
+    /// </summary>
     [Parameter]
     public List<bool> Picked { get; set; }
 

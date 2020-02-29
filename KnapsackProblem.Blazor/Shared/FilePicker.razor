@@ -7,15 +7,27 @@
 <input value="@Title" type="button" onclick="document.getElementById('@_filePickerGuid').click()" />
 
 @code {
+    /// <summary>
+    /// Вызывается после выбора файлов и закрытия диалога.
+    /// </summary>
     [Parameter]
     public EventCallback<IEnumerable<IFileReference>> OnFilesSelected { get; set; }
 
+    /// <summary>
+    /// Текст кнопки открытия диалога для выбора файла(ов).
+    /// </summary>
     [Parameter]
     public string Title { get; set; }
 
+    /// <summary>
+    /// Если истинно, разрешает выбор нескольких файлов.
+    /// </summary>
     [Parameter]
     public bool AllowMultiple { get; set; } = false;
 
+    /// <summary>
+    /// Разрешенные расширения файлов.
+    /// </summary>
     [Parameter]
     public string FileFormats { get; set; } = "";
 

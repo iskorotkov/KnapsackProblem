@@ -1,12 +1,11 @@
-﻿@using KnapsackProblem.BlazorApp.Data
-@inject InputService InputService
+﻿@inject InputService InputService
 @implements IDisposable
 
 <label class="mr-2" for="weight">Capacity</label>
 <input id="weight" type="number" @bind="@Knapsack.MaxWeight" min="0" required />
 
 @code {
-    private Data.Knapsack.Knapsack Knapsack { get; set; }
+    private Knapsack Knapsack { get; set; }
 
     private void UpdateKnapsack()
     {

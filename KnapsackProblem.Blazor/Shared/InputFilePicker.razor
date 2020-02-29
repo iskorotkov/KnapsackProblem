@@ -1,5 +1,4 @@
-﻿@using KnapsackProblem.BlazorApp.Data
-@inject InputService Input
+﻿@inject InputService Input
 
 <FilePicker Title="Select input file" AllowMultiple="false" OnFilesSelected="ReadFile" FileFormats=".json" />
 
@@ -7,6 +6,9 @@
 
 @code
 {
+    /// <summary>
+    /// Вызывается после чтения входных данных из файла.
+    /// </summary>
     [Parameter]
     public EventCallback<IFileReference> NewValuesRead { get; set; }
 
@@ -26,10 +28,12 @@
             catch (InvalidInputFileException)
             {
                 ErrorMessage.Show("Input file is in incorrect format");
+                return;
             }
             catch
             {
                 ErrorMessage.Show("Unknown error occured while reading input file");
+                return;
             }
             await NewValuesRead.InvokeAsync(file);
         }

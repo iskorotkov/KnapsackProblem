@@ -1,8 +1,6 @@
 ﻿@page "/"
-@using Data.Knapsack
-@using Data
 @inject InputService InputService
-@inject ImplementationInvokeService Invoker
+@inject SolverService Invoker
 
 <h1 class="text-center">Knapsack problem</h1>
 
@@ -48,6 +46,6 @@
 
     private void Process()
     {
-        Picked = Invoker.InvokeSelected().ToList();
+        Picked = Invoker.Solve().ToList();
     }
 }

@@ -1,5 +1,4 @@
-@using KnapsackProblem.BlazorApp.Data
-@inject ImplementationRegistryService Registry
+@inject SolverListService Registry
 
 <FilePicker Title="Add implementations" AllowMultiple="true" OnFilesSelected="AddImplementations" FileFormats=".dll" />
 
@@ -15,7 +14,7 @@
         {
             try
             {
-                await Registry.Add(file);
+                await Registry.AddFromFile(file);
             }
             catch (BadImageFormatException)
             {

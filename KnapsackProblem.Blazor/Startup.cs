@@ -1,5 +1,6 @@
 using Blazor.FileReader;
 using KnapsackProblem.BlazorApp.Data;
+using KnapsackProblem.BlazorApp.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,9 +26,9 @@ namespace KnapsackProblem.BlazorApp
             services.AddServerSideBlazor();
             services.AddFileReaderService();
 
-            services.AddScoped<ImplementationRegistryService>();
+            services.AddScoped<SolverListService>();
             services.AddScoped<InputService>();
-            services.AddScoped<ImplementationInvokeService>();
+            services.AddScoped<SolverService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

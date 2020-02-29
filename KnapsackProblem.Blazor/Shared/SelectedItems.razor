@@ -1,6 +1,4 @@
-﻿@using Data
-
-@if (Picked != null && Picked.Count > 0)
+﻿@if (Picked != null && Picked.Count > 0)
 {
     <text>Selected items are:</text>
     @for (var i = 0; i < Picked.Count; i++)
@@ -10,6 +8,9 @@
 }
 
 @code {
+    /// <summary>
+    /// Список флагов, показывающих, нужно ли класть объект с определенным индексом в рюкзак.
+    /// </summary>
     [Parameter]
     public List<bool> Picked { get; set; }
 }

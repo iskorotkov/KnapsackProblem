@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackProblem.BlazorApp",
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "KnapsackProblem.Implementation.FSharp", "KnapsackProblem.Implementation.FSharp\KnapsackProblem.Implementation.FSharp.fsproj", "{9CF11BEF-7ACD-4BBF-A87F-22266E6EB3C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackProblem.Interface", "KnapsackProblem.Interface\KnapsackProblem.Interface.csproj", "{721421EF-36F3-4E34-8AF8-F2413E90D2DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackProblem.Interface", "KnapsackProblem.Interface\KnapsackProblem.Interface.csproj", "{721421EF-36F3-4E34-8AF8-F2413E90D2DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

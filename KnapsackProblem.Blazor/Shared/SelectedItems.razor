@@ -1,0 +1,15 @@
+﻿@using Data
+
+@if (Picked != null && Picked.Count > 0)
+{
+    <text>Selected items are:</text>
+    @for (var i = 0; i < Picked.Count; i++)
+    {
+        <text> @(i+1)</text>
+    }
+}
+
+@code {
+    [Parameter]
+    public List<bool> Picked { get; set; }
+}

@@ -39,12 +39,6 @@ namespace KnapsackProblem.BlazorApp.Data.Services
             await using var stream = await file.CreateMemoryStreamAsync(4096);
             using var reader = new StreamReader(stream);
             var content = reader.ReadToEnd();
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            if (file is IDisposable obj)
-            {
-                obj.Dispose();
-            }
-
             var decerialized = JsonConvert.DeserializeObject<KnapsackInput>(content);
             if (decerialized?.Items == null || decerialized.Knapsack == null)
             {

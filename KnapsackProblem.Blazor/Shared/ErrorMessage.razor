@@ -1,0 +1,18 @@
+﻿<div class="modal d-md-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>@Message</p>
+                <input type="button" value="Close message" @onclick="OnCloseMessage" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnCloseMessage { get; set; }
+}

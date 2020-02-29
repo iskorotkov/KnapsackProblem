@@ -17,12 +17,12 @@ namespace KnapsackProblem.BlazorApp.Data
 
         public async Task Add(IFileReference file)
         {
-            List<Type> solverTypes;
+            var addedImplementations = 0;
             await using (var stream = await file.CreateMemoryStreamAsync())
             {
                 var bytes = stream.ToArray();
                 var assembly = Assembly.Load(bytes);
-                solverTypes = assembly
+                var solverTypes = assembly
                     .GetExportedTypes()
                     .Where(t => typeof(ISolver).IsAssignableFrom(t))
                     .ToList();
@@ -38,11 +38,18 @@ namespace KnapsackProblem.BlazorApp.Data
                         continue;
                     }
 
-                    if (solver != null) Implementations.Add(solver);
+                    if (solver != null)
+                    {
+                        Implementations.Add(solver);
+                        addedImplementations++;
+                    }
                 }
             }
 
-            if (solverTypes.Count == 0) throw new NoImplementationException();
+            if (addedImplementations == 0)
+            {
+                throw new NoImplementationException();
+            }
             ImplementationAdded?.Invoke();
         }
 

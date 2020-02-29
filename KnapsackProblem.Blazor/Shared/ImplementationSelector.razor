@@ -3,8 +3,8 @@
 @inject ImplementationRegistryService RegistryService
 @implements IDisposable
 
-<label for="selector">Select implementation</label>
-<select id="selector" @onchange="OnSelected" class="custom-select-sm m-1" required>
+<label for="selector" class="mr-2">Select implementation</label>
+<select id="selector" @onchange="OnSelected" class="custom-select-sm" required>
     @{
         for (var i = 0; i < _implementations.Count; i++)
         {

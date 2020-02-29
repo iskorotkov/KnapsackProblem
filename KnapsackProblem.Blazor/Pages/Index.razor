@@ -4,26 +4,27 @@
 @inject InputService InputService
 @inject ImplementationInvokeService Invoker
 
-<h1>Knapsack problem</h1>
+<h1 class="text-center">Knapsack problem</h1>
 
-<form @onsubmit="Process">
-    <div class="m-2">
+<form @onsubmit="Process" class="p-2">
+    <div class="p-2">
         <InputFilePicker NewValuesRead="@UpdateItems" />
         <ImplementationPicker />
     </div>
-    <div class="row m-2">
+
+    <div class="p-2">
         <ImplementationSelector />
     </div>
 
-    <div class="row m-2">
+    <div class="p-2">
         <KnapsackStatus />
     </div>
 
-    <div class="m-2">
+    <div class="p-2">
         <AvailableItems Items="@Items" Picked="Picked" />
     </div>
 
-    <div class="m-2">
+    <div class="p-2">
         <SelectedItems Picked="Picked"/>
     </div>
 

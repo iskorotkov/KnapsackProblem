@@ -1,7 +1,7 @@
 ﻿@using Data.Knapsack
 
-Available items:
-<table cellpadding="2" class="table table-bordered">
+<h3>Available items:</h3>
+<table class="table table-bordered table-responsive">
     <thead>
         <tr>
             <th>Id</th>
@@ -42,9 +42,7 @@ Available items:
     </tbody>
 </table>
 
-<div>
-    <input class="btn btn-outline-dark" type="button" @onclick="@CreateNewItem" value="Add new item" />
-</div>
+<input class="btn btn-outline-dark" type="button" @onclick="@CreateNewItem" value="Add new item" />
 
 @code {
     [Parameter]
